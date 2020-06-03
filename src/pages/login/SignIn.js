@@ -2,20 +2,49 @@ import React, { Fragment } from 'react';
 import '../../asset/style/Sign.css';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import {Link} from  'react-router-dom';
+import axios from "axios";
+const baseUrl = "https://mini-project1.herokuapp.com/api/v1"
+
 
 class SignIn extends React.Component {
     state = {
         email: "",
-        password: ""
+        password: "",
+        isLoading: false,
+        error: false
+
     }
 
     handleOnChange = (e) => {
         e.preventDefault();
 
         this.setState({
-            [e.target.id]: e.target.value
+            [e.target.name]: e.target.value
         })
     }
+
+    submit = async(e) => {
+        this.setState({ isLoading: true })
+        e.preventDefault()
+
+        const loginUser = {
+          email: this.state.email,
+          password: this.state.password
+        }
+
+        try {
+          const res = await axios.post(`${baseUrl}/user/login`, loginUser)
+          if(res.data.status === "success") {
+            localStorage.setItem("token", res.data.data.token)
+            this.setState({ isLoading: false, email: "", password: "" })
+            this.props.history.push("/dashboard")
+          }
+        }catch(error){
+          console.log(error)
+          this.setState({ isLoading: false, email: "", password: "" })
+        }
+      }
+    
 
     render(){
     return(
@@ -44,7 +73,7 @@ class SignIn extends React.Component {
                             <img className="img-in"     src={require('../../asset/img/linkedin.svg')} alt="linkedin"/>
                         </div>
                         <div className="sign-form">
-                        <Form className="form-page">
+                        <Form className="form-page" onSubmit={this.submit} >
                             <p>or use your email account</p>
                             <FormGroup className="form-group">
                                 <Label for="exampleEmail">Email</Label>
@@ -52,7 +81,7 @@ class SignIn extends React.Component {
                                 type="email" 
                                 name="email" 
                                 id="exampleEmail" 
-                                handleOnChange={this.handleOnChange}
+                                onChange={this.handleOnChange}
                                 placeholder="Insert Email" />
                             </FormGroup>
                             <FormGroup className="form-group">
@@ -61,10 +90,10 @@ class SignIn extends React.Component {
                                 type="password" 
                                 name="password" 
                                 id="examplePassword"
-                                handleOnChange={this.handleOnChange}
+                                onChange={this.handleOnChange}
                                 placeholder="insert Password" />
                             </FormGroup>
-                            <Button outline color="primary">Sign In</Button>{' '}
+                            <Button outline color="primary">{this.state.isLoading ? "loading..." : "signup"}</Button>{' '}
                         </Form>
                         </div>
                     </div>

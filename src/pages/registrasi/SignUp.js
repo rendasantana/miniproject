@@ -2,8 +2,6 @@ import React, { Fragment } from 'react';
 import '../../asset/style/Sign.css';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import {Link} from  'react-router-dom';
-import axios from "axios";
-const baseUrl = "https://ga-todoapps.herokuapp.com/api/v1"
 
 
 class SignUp extends React.Component {

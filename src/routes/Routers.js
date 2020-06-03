@@ -5,7 +5,7 @@ import HomeSign from '../view/HomeSign';
 import SignIn from '../pages/login/SignIn';
 import SignUp from '../pages/registrasi/SignUp';
 
-import TaskManager from '../component/TaskManager';
+import TaskManager from '../pages/private/home/task/TaskManager';
 
 import ForgotPassword from '../pages/lupaPassword/ForgotPassword';
 import IndexPrivate from '../pages/private/IndexPrivate';
