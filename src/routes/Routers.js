@@ -1,19 +1,34 @@
-import React, {Fragment} from 'react';
-import HomePage from '../view/HomePage';
-import SignIn from '../component/SignIn';
-import SignUp from '../component/SignUp';
+import React from 'react';
+import { BrowserRouter, Route, Switch} from "react-router-dom";
+//! Sign Page
+import HomeSign from '../view/HomeSign';
+import SignIn from '../pages/login/SignIn';
+import SignUp from '../pages/registrasi/SignUp';
+
 import TaskManager from '../component/TaskManager';
-import { BrowserRouter, Route} from "react-router-dom";
+
+import ForgotPassword from '../pages/lupaPassword/ForgotPassword';
+import IndexPrivate from '../pages/private/IndexPrivate';
+import NotFound from '../pages/404/NotFound';
+import PrivateRoutes from './privateRoutes/PrivateRoutes';
+
 
 const Routers = () => {
     return(
       <BrowserRouter>
-        <Fragment>
-          <Route path="/" exact component={HomePage}/>
-          <Route path="/signin" exact component={SignIn}/>
-          <Route path="/signup" exact component={SignUp}/>
-          <Route path="/taskmanager" exact component={TaskManager}/>
-        </Fragment>
+        <Switch>
+          <Route path="/homesign" exact component={HomeSign}/>
+          <Route path="/signin" component={SignIn}/>
+          <Route path="/signup"  component={SignUp}/>
+          <Route path="/forgotpassword" component={ForgotPassword}/>
+          <Route path="/taskmanager"  component={TaskManager}/>
+          {/* Private Router */}
+          <PrivateRoutes path="/pengaturan" component={IndexPrivate}/>
+          <PrivateRoutes path="/product" component={IndexPrivate}/>
+          <PrivateRoutes path="/transaksi" component={IndexPrivate}/>
+          <PrivateRoutes path="/home" component={IndexPrivate}/>
+          <Route component={NotFound}/>
+        </Switch>        
       </BrowserRouter>
       
     )

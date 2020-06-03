@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import '../asset/style/TaskManager.css';
+import '../asset/style/SignIn.css';
 import TaskList from './TaskList';
 
 const AddTask = ({ saveTodo }) => {
@@ -10,8 +10,6 @@ const AddTask = ({ saveTodo }) => {
       [event.target.name]: event.target.value
     });
   }
-
-  const handleSubmit = () => 
 
     return(
     <Fragment>
@@ -63,6 +61,7 @@ const AddTask = ({ saveTodo }) => {
       
     </Fragment>
   )
-};
+}
+
 
 export default AddTask;
