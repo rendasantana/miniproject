@@ -1,16 +1,47 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment} from 'react';
 import '../../../../asset/style/SignIn.css';
-import TaskList from './TaskList';
+// import TaskList from './TaskList';
+import axios from 'axios';
 
-const AddTask = ({ saveTodo }) => {
-  const [title, setTitle] = useState('');
+const baseUrl = "https://mini-project1.herokuapp.com/api/v1"
 
-  const handleChange = event => {
-    setTitle({
-      [event.target.name]: event.target.value
-    });
+class AddTask extends React.Component {
+  state={
+    name: "",
+    description: "",
+    isLoading: false
   }
 
+  change = e => {
+    this.setState({
+      [e.target.name] : e.target.value
+    })
+  } 
+
+  submit = async(e) => {
+    this.setState({ isLoading: true })
+    let token = localStorage.getItem("token")
+    e.preventDefault()
+    // create data 
+    const newTodo = {
+      name: this.state.name,
+      description: this.state.description
+    }
+
+    try {
+      const res = await axios.post(`${baseUrl}/tasks`, newTodo, {
+        headers: {
+          authorization: token
+        }
+      })
+      this.props.getAll()
+      this.setState({ name: "", description: "", isLoading: false })
+    }catch(err){
+      console.log(err)
+    }
+  }
+
+  render(){
     return(
     <Fragment>
       <div className="task-container">
@@ -26,33 +57,13 @@ const AddTask = ({ saveTodo }) => {
               <p>Important</p>
               <p>Completed</p>
             </div>
+            <h2>Create New Todo</h2>
             <div className="main-right">
-
-              <form 
-                onSubmit={(event) => {
-                  event.preventDefault();
-                  saveTodo(title);
-              }}
-              >
-                <input className="addtask" placeholder="Basic usage" 
-                  value={title}
-                  onChange={handleChange}
-                />
-
-                <button
-                
-                >
-                  Tambah</button>
+              <form onSubmit={this.submit}>
+                <input type="text" name="name" value={this.state.name} placeholder="name"  onChange={this.change}/>
+                <input type="text" name="description" value={this.state.description} placeholder="description" onChange={this.change}/>
+                <button>{this.state.isLoading ? "loading..." : "Tambah"}</button>
               </form>
-
-
-              <div className="card-task">
-                {title}
-                <TaskList title="Hello"/>
-              </div>
-
-
-
             </div>
           </div>
         </div>
@@ -61,6 +72,7 @@ const AddTask = ({ saveTodo }) => {
       
     </Fragment>
   )
+ }
 }
 
 

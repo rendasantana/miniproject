@@ -1,0 +1,66 @@
+.task-container{
+    background-color: aqua;
+    margin: auto;
+    height: 50vw;
+}
+
+.container-page {
+    display: inline;
+}
+
+.task-header {
+    background-color:  #0078D7;
+    color: white;
+    height: 10vw;
+    padding: 0 auto;
+}
+
+.task-main {
+    background-color: white;
+    display: flex;
+    height: 40vw;
+}
+.main-left {
+    width: 30%;
+    
+    background: whitesmoke;
+    color:black;
+}
+
+.main-right {
+    width: 70%;
+    text-align: center;
+}
+
+.addtask {
+    margin-top: 50px;
+    width: 500px;
+    border: none;
+    margin-bottom: 100px;
+}
+
+/* Card Task */
+
+.card-task {
+    background-color: burlywood;
+    width: 800px;
+    border: 1px solid black;
+}
+
+.card-list {
+    height: 50px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+
+
+/* Star */
+.yes {
+    color: red;
+}
+
+.no {
+    color: gray;
+}

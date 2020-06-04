@@ -34,10 +34,11 @@ class SignIn extends React.Component {
 
         try {
           const res = await axios.post(`${baseUrl}/user/login`, loginUser)
-          if(res.data.status === "success") {
+          console.log("test respon", res)
+          if(res.data.status === "Success") {
             localStorage.setItem("token", res.data.data.token)
             this.setState({ isLoading: false, email: "", password: "" })
-            this.props.history.push("/dashboard")
+            this.props.history.push("/taskmanager")
           }
         }catch(error){
           console.log(error)
@@ -93,7 +94,7 @@ class SignIn extends React.Component {
                                 onChange={this.handleOnChange}
                                 placeholder="insert Password" />
                             </FormGroup>
-                            <Button outline color="primary">{this.state.isLoading ? "loading..." : "signup"}</Button>{' '}
+                            <Button outline color="primary">{this.state.isLoading ? "loading..." : "Sign In"}</Button>{' '}
                         </Form>
                         </div>
                     </div>
