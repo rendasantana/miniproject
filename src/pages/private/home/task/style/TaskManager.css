@@ -22,14 +22,32 @@
 }
 .main-left {
     width: 30%;
-    
     background: whitesmoke;
     color:black;
+    padding: auto 10px;
 }
+
+.main-left p {
+    margin: 0px 10px;
+}
+
+
+/* TaskList */
 
 .main-right {
     width: 70%;
     text-align: center;
+}
+
+.form-input {
+    background-color: darkturquoise;
+    /* margin-top: 30px; */
+    display: inline block;
+    justify-content: center;
+}
+
+.form-input input {
+    display: inline;
 }
 
 .addtask {
@@ -41,18 +59,18 @@
 
 /* Card Task */
 
-.card-task {
+.task-task {
     background-color: burlywood;
     width: 800px;
     border: 1px solid black;
 }
 
-.card-list {
+/* .task-list {
     height: 50px;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-}
+} */
 
 
 

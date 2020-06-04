@@ -1,5 +1,6 @@
 import React, { Fragment} from 'react';
-import '../../../../asset/style/SignIn.css';
+import { Form, Input, FormGroup, Col, Table } from 'reactstrap';
+import './style/TaskManager.css';
 // import TaskList from './TaskList';
 import axios from 'axios';
 
@@ -17,6 +18,11 @@ class AddTask extends React.Component {
       [e.target.name] : e.target.value
     })
   } 
+
+  logout = e => {
+    localStorage.removeItem("token");
+    this.props.history.push("/signin")
+  }
 
   submit = async(e) => {
     this.setState({ isLoading: true })
@@ -48,7 +54,7 @@ class AddTask extends React.Component {
         <div className="container-page">
           <div className="task-header">
             <p>Todos</p>
-            <p>Sign Out</p>
+            <button onClick={this.logout}>sign out</button>
           </div>               
           <div className="task-main">
             <div className="main-left">
@@ -57,13 +63,18 @@ class AddTask extends React.Component {
               <p>Important</p>
               <p>Completed</p>
             </div>
-            <h2>Create New Todo</h2>
+            
             <div className="main-right">
-              <form onSubmit={this.submit}>
-                <input type="text" name="name" value={this.state.name} placeholder="name"  onChange={this.change}/>
-                <input type="text" name="description" value={this.state.description} placeholder="description" onChange={this.change}/>
-                <button>{this.state.isLoading ? "loading..." : "Tambah"}</button>
-              </form>
+            <h2>Create New task</h2>
+              <Form onSubmit={this.submit} className="form-input">
+                <FormGroup row>
+                  <Col sm={30}>
+                  <Input type="text" name="name" value={this.state.name} placeholder="name"  onChange={this.change}/>
+                  <Input type="text" name="description" value={this.state.description} placeholder="description" onChange={this.change}/>
+                  </Col>
+                  <button>{this.state.isLoading ? "loading..." : "Tambah"}</button>
+                </FormGroup>
+              </Form>
             </div>
           </div>
         </div>
