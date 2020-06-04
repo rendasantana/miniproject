@@ -3,11 +3,12 @@ import './style/TaskManager.css';
 import TaskList from './TaskList';
 // import AddTask from './AddTask';
 
+
 function TaskManager() {
   return(
     <Fragment>
       {/* <AddTask/> */}
-      <TaskList/>
+      <TaskList />
     </Fragment>
   )
 };

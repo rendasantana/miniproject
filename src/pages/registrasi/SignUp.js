@@ -8,42 +8,42 @@ const baseUrl = "https://mini-project1.herokuapp.com/api/v1"
 
 class SignUp extends React.Component {
     state = {
+        name: "",
         email: "",
         password: "", 
         isLoading: false,
         error: false
-    
     }
 
     handleOnChange = (e) => {
         e.preventDefault();
 
         this.setState({
-            [e.target.id]: e.target.value
+            [e.target.name]: e.target.value
         })
     }
 
-    ubmit = async(e) => {
+    submit = async(e) => {
         this.setState({ isLoading: true })
         e.preventDefault()
 
-        const registerUser = {
+        const signUser = {
             name: this.state.name,
             email: this.state.email,
             password: this.state.password
         }
 
         try {
-          const res = await axios.post(`${baseUrl}/user/register`, registerUser)
+          const res = await axios.post(`${baseUrl}/user/register`, signUser)
           console.log("test respon", res)
           if(res.data.status === "Success") {
             localStorage.setItem("token", res.data.data.token)
-            this.setState({ isLoading: false, name: "", email: "", password: "" })
-            this.props.history.push("/signin")
+            this.setState({ isLoading: false, name:"", email: "", password: "" })
+            this.props.history.push("/taskmanager")
           }
         }catch(error){
           console.log(error)
-          this.setState({ isLoading: false, name: "",email: "", password: "" })
+          this.setState({ isLoading: false,name:"", email: "", password: "" })
         }
       }
 
@@ -74,16 +74,16 @@ class SignUp extends React.Component {
                             <img className="img-in"     src={require('../../asset/img/linkedin.svg')} alt="linkedin"/>
                         </div>
                         <div className="sign-form">
-                        <Form className="form-page" onSubmit={this.submit}>
+                        <Form className="form-page" onSubmit={this.submit} >
                             <p>or use your email account</p>
                             <FormGroup className="form-group">
                                 <Label for="exampleName">Name</Label>
-                                <Input 
-                                type="name"
+                                <Input required 
+                                type="name" 
                                 name="name" 
                                 id="exampleName" 
-                                handleOnChange={this.handleOnChange}
-                                placeholder="Insert Your Name" />
+                                onChange={this.handleOnChange}
+                                placeholder="Insert Name" />
                             </FormGroup>
                             <FormGroup className="form-group">
                                 <Label for="exampleEmail">Email</Label>
@@ -91,8 +91,8 @@ class SignUp extends React.Component {
                                 type="email" 
                                 name="email" 
                                 id="exampleEmail" 
-                                handleOnChange={this.handleOnChange}
-                                placeholder="Insert Your Email" />
+                                onChange={this.handleOnChange}
+                                placeholder="Insert Email" />
                             </FormGroup>
                             <FormGroup className="form-group">
                                 <Label for="examplePassword" >Password</Label>
@@ -100,10 +100,10 @@ class SignUp extends React.Component {
                                 type="password" 
                                 name="password" 
                                 id="examplePassword"
-                                handleOnChange={this.handleOnChange}
-                                placeholder="insert Your Password" />
+                                onChange={this.handleOnChange}
+                                placeholder="insert Password" />
                             </FormGroup>
-                            <Button outline color="primary">Sign Up</Button>{' '}
+                            <Button outline color="primary">{this.state.isLoading ? "loading..." : "Sign In"}</Button>{' '}
                         </Form>
                         </div>
                     </div>

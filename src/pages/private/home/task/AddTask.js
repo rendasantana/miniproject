@@ -1,5 +1,5 @@
 import React, { Fragment} from 'react';
-import { Form, Input, FormGroup, Col, Table } from 'reactstrap';
+import { Form, Input, FormGroup, Col } from 'reactstrap';
 import './style/TaskManager.css';
 // import TaskList from './TaskList';
 import axios from 'axios';
@@ -19,10 +19,10 @@ class AddTask extends React.Component {
     })
   } 
 
-  logout = e => {
-    localStorage.removeItem("token");
-    this.props.history.push("/signin")
-  }
+  // logout = e => {
+  //   localStorage.removeItem("token");
+  //   this.props.history.push("/signin")
+  // }
 
   submit = async(e) => {
     this.setState({ isLoading: true })
@@ -54,7 +54,7 @@ class AddTask extends React.Component {
         <div className="container-page">
           <div className="task-header">
             <p>Todos</p>
-            <button onClick={this.logout}>sign out</button>
+            <button onClick={this.props.logout}>sign out</button>
           </div>               
           <div className="task-main">
             <div className="main-left">
@@ -69,8 +69,17 @@ class AddTask extends React.Component {
               <Form onSubmit={this.submit} className="form-input">
                 <FormGroup row>
                   <Col sm={30}>
-                  <Input type="text" name="name" value={this.state.name} placeholder="name"  onChange={this.change}/>
-                  <Input type="text" name="description" value={this.state.description} placeholder="description" onChange={this.change}/>
+                  <Input type="text" 
+                  name="name" 
+                  value={this.state.name} 
+                  placeholder="name" 
+                  onChange={this.change}/>
+
+                  <Input type="text" 
+                  name="description" 
+                  value={this.state.description} 
+                  placeholder="description" 
+                  onChange={this.change}/>
                   </Col>
                   <button>{this.state.isLoading ? "loading..." : "Tambah"}</button>
                 </FormGroup>

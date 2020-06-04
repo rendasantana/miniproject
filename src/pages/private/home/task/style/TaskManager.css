@@ -57,6 +57,12 @@
     margin-bottom: 100px;
 }
 
+.table-list {
+    background-color: darkturquoise;
+    width: 200px;
+}
+
+
 /* Card Task */
 
 .task-task {

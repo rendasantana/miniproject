@@ -5,12 +5,13 @@ import HomeSign from '../view/HomeSign';
 import SignIn from '../pages/login/SignIn';
 import SignUp from '../pages/registrasi/SignUp';
 
-import TaskManager from '../pages/private/home/task/TaskManager';
+// import TaskManager from '../pages/private/home/task/TaskManager';
 
 import ForgotPassword from '../pages/lupaPassword/ForgotPassword';
 import IndexPrivate from '../pages/private/IndexPrivate';
 import NotFound from '../pages/404/NotFound';
 import PrivateRoutes from './privateRoutes/PrivateRoutes';
+import TaskList from '../pages/private/home/task/TaskList';
 
 
 const Routers = () => {
@@ -18,10 +19,10 @@ const Routers = () => {
       <BrowserRouter>
         <Switch>
           <Route path="/homesign" exact component={HomeSign}/>
-          <Route path="/signin" component={SignIn}/>
-          <Route path="/signup"  component={SignUp}/>
+          <Route path="/signin" exact component={SignIn}/>
+          <Route path="/signup"  exact component={SignUp}/>
           <Route path="/forgotpassword" component={ForgotPassword}/>
-          <Route path="/taskmanager"  component={TaskManager}/>
+          <Route path="/taskmanager" exact component={TaskList}/>
           {/* Private Router */}
           <PrivateRoutes path="/pengaturan" component={IndexPrivate}/>
           <PrivateRoutes path="/product" component={IndexPrivate}/>
